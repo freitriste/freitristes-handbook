@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="pt-BR" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team GO Rocket Purification & Grunt Guide</title>
+    <title>Team GO Rocket & Top Attackers Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,7 @@
 <body class="bg-slate-950 text-slate-100 min-h-full flex flex-col antialiased selection:bg-rose-600 selection:text-white">
 
     <header class="bg-gradient-to-r from-slate-900 via-zinc-900 to-slate-900 border-b border-slate-800 sticky top-0 z-30 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-lg shadow-rose-900/40 border border-rose-500/30">
                     <i class="fa-solid fa-rocket text-white text-lg"></i>
@@ -22,35 +22,45 @@
                 <div>
                     <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
                         Rocket Shadow Index
-                        <span class="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-medium">v2.6 Live</span>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-medium">v3.0 Live</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Purification Costs & Grunt Rotations Reference</p>
+                    <p id="header-subtitle" class="text-xs text-slate-400">Guia de Purificação, Grunts & Melhores Atacantes</p>
                 </div>
             </div>
-            
-            <div class="flex items-center space-x-2 bg-slate-900/80 p-1.5 rounded-xl border border-slate-800">
-                <button onclick="switchTab('lookup')" id="btn-lookup" class="px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-900/30">
-                    <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Smart Lookup
-                </button>
-                <button onclick="switchTab('database')" id="btn-database" class="px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-database mr-1.5"></i> Full Rotation DB
-                </button>
+
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <!-- Navigation Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-1 bg-slate-900/80 p-1.5 rounded-xl border border-slate-800">
+                    <button onclick="switchTab('lookup')" id="btn-lookup" class="px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-900/30">
+                        <i class="fa-solid fa-magnifying-glass mr-1.5"></i><span data-i18n="tabLookup">Busca Rápida</span>
+                    </button>
+                    <button onclick="switchTab('database')" id="btn-database" class="px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-database mr-1.5"></i><span data-i18n="tabDatabase">Tabela Grunts</span>
+                    </button>
+                    <button onclick="switchTab('attackers')" id="btn-attackers" class="px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-trophy mr-1.5"></i><span data-i18n="tabAttackers">Melhores Atacantes</span>
+                    </button>
+                </div>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center bg-slate-900/80 p-1 rounded-xl border border-slate-800" role="group" aria-label="Language switcher">
+                    <button onclick="setLanguage('pt')" id="lang-pt" class="px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all bg-rose-600 text-white">PT</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white">EN</button>
+                </div>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
+
         <!-- LOOKUP TAB CONTENT -->
         <div id="tab-lookup" class="space-y-8">
-            
-            <!-- Hero Search & Filter Section -->
             <div class="bg-gradient-to-b from-slate-900 to-slate-900/60 rounded-2xl border border-slate-800/80 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-rose-600/5 rounded-full blur-3xl pointer-events-none"></div>
-                
+
                 <div class="max-w-3xl mx-auto text-center space-y-3 mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Find Shadow Costs Instantly</h2>
-                    <p class="text-sm text-slate-400">Search by Grunt taunt phrase or directly by the catchable 1st slot Pokémon to calculate required purification dust.</p>
+                    <h2 data-i18n="lookupTitle" class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Consulte Custos Sombrosos na Hora</h2>
+                    <p data-i18n="lookupSubtitle" class="text-sm text-slate-400">Busque pela frase do Grunt ou direto pelo Pokémon do 1º slot para calcular a Poeira Estelar necessária.</p>
                 </div>
 
                 <div class="max-w-2xl mx-auto space-y-4">
@@ -58,7 +68,7 @@
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i class="fa-solid fa-search text-slate-500"></i>
                         </div>
-                        <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Type taunt phrase (e.g. 'Let's rock') or Pokémon name ('Snorlax', 'Aron')..." 
+                        <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Digite a frase (ex: 'Let's rock') ou Pokémon ('Snorlax', 'Aron')..."
                             class="w-full pl-11 pr-4 py-3.5 bg-slate-950/90 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 shadow-inner transition-all">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                             <button onclick="clearSearch()" id="clear-btn" class="hidden text-slate-500 hover:text-white p-1 text-xs">
@@ -67,9 +77,8 @@
                         </div>
                     </div>
 
-                    <!-- Quick Tags / Suggestions -->
                     <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
-                        <span class="text-xs text-slate-500 font-medium mr-1">Quick Try:</span>
+                        <span data-i18n="quickTry" class="text-xs text-slate-500 font-medium mr-1">Teste rápido:</span>
                         <button onclick="quickSearch('Let’s rock and roll!')" class="text-xs bg-slate-800/80 hover:bg-slate-800 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700/60 transition-colors">
                             "Let’s rock and roll!"
                         </button>
@@ -89,22 +98,15 @@
                 </div>
             </div>
 
-            <div id="search-results" class="space-y-6">
-                <div class="text-center py-12 text-slate-500 border border-dashed border-slate-800 rounded-2xl">
-                    <i class="fa-solid fa-rocket text-3xl mb-3 text-slate-700 animate-pulse"></i>
-                    <p class="text-sm font-medium">Start typing a taunt or Pokémon name above to query rotation and purification costs.</p>
-                </div>
-            </div>
-
+            <div id="search-results" class="space-y-6"></div>
         </div>
 
         <!-- DATABASE TAB CONTENT -->
         <div id="tab-database" class="hidden space-y-6">
-            
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
                 <div>
-                    <h2 class="text-lg font-bold text-white">Complete Rotation & Purification Matrix</h2>
-                    <p class="text-xs text-slate-400">All currently mapped Grunts, taunts, first slot Pokémon, and purification dust requirements.</p>
+                    <h2 data-i18n="dbTitle" class="text-lg font-bold text-white">Matriz Completa de Rotação & Purificação</h2>
+                    <p data-i18n="dbSubtitle" class="text-xs text-slate-400">Todos os Grunts mapeados, frases, Pokémon do 1º slot e custos de purificação.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -124,33 +126,79 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-800 bg-slate-950/60 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                                <th class="py-4 px-6">Grunt Type</th>
-                                <th class="py-4 px-6">Taunt Phrase</th>
-                                <th class="py-4 px-6">Catchable 1st Pokémon</th>
-                                <th class="py-4 px-6 text-right">Purification Cost</th>
+                                <th data-i18n="thGrunt" class="py-4 px-6">Tipo de Grunt</th>
+                                <th data-i18n="thTaunt" class="py-4 px-6">Frase (Taunt)</th>
+                                <th data-i18n="thPokemon" class="py-4 px-6">1º Pokémon Capturável</th>
+                                <th data-i18n="thCost" class="py-4 px-6 text-right">Custo de Purificação</th>
                             </tr>
                         </thead>
-                        <tbody id="full-db-tbody" class="divide-y divide-slate-800/60 text-sm">
-                            <!-- Populated via JavaScript -->
-                        </tbody>
+                        <tbody id="full-db-tbody" class="divide-y divide-slate-800/60 text-sm"></tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
+        <!-- TOP ATTACKERS TAB CONTENT -->
+        <div id="tab-attackers" class="hidden space-y-6">
+            <div class="bg-gradient-to-b from-slate-900 to-slate-900/60 rounded-2xl border border-slate-800/80 p-6 shadow-2xl space-y-5">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 data-i18n="attackersTitle" class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-trophy text-amber-400"></i> Melhores Atacantes por Tipo (Meta 2027)
+                        </h2>
+                        <p data-i18n="attackersSubtitle" class="text-xs text-slate-400 mt-1">
+                            Ordenados do melhor para o pior por tipagem, com golpes Ágil e Carregado. Referência: SavyGO.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-3 mt-2.5 text-[11px] text-slate-400">
+                            <span class="inline-flex items-center gap-1">
+                                <span class="px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">*</span>
+                                <span data-i18n="legendLegacy">Golpe Legado / MT de Elite</span>
+                            </span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">+</span>
+                                <span data-i18n="legendPlus">Golpe Plus</span>
+                            </span>
+                            <span class="inline-flex items-center gap-1">
+                                <i class="fa-solid fa-fire-flame-curved text-purple-400"></i>
+                                <span data-i18n="legendShadow">Sombroso</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-filter text-slate-500 text-xs"></i>
+                        </div>
+                        <input type="text" id="attackers-search" oninput="renderAttackers()" placeholder="Filtrar Pokémon ou golpe..."
+                            class="w-full pl-9 pr-3 py-2.5 bg-slate-950/90 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500">
+                    </div>
+                </div>
+
+                <!-- Type Filter Pills -->
+                <div id="type-filters" class="flex flex-wrap gap-2 pt-3 border-t border-slate-800/80"></div>
+            </div>
+
+            <!-- Attackers Grid Output -->
+            <div id="attackers-container" class="space-y-6"></div>
         </div>
 
     </main>
 
-    <footer class="w-full border-t border-slate-800/80 mt-12 py-8">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center space-y-3">
-            <p class="text-xs text-slate-400 font-medium">Find this tool helpful? Consider supporting the project!</p>
+    <!-- FOOTER WITH PAYPAL DONATION BUTTON -->
+    <footer class="bg-slate-900/50 border-t border-slate-800/80 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-center sm:text-left">
+                <p data-i18n="footerTagline" class="text-xs text-slate-400">Esta ferramenta te ajudou a economizar Poeira Estelar?</p>
+                <p data-i18n="footerSub" class="text-[11px] text-slate-500 mt-0.5">Rocket Shadow Index — Guia da comunidade Pokémon GO</p>
+            </div>
             <a href="https://www.paypal.com/donate/?hosted_button_id=G7Z3A2V8XR7RL" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/10 transition-all text-sm transform hover:-translate-y-0.5">
-                <i class="fa-solid fa-mug-hot"></i> Buy me a coffee
+               class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/10 transition-all text-xs transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-mug-hot text-sm"></i>
+                <span data-i18n="donateBtn">Pague um café (PayPal)</span>
             </a>
         </div>
     </footer>
 
+    <!-- CUSTOM MODAL -->
     <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
             <div class="flex items-center justify-between">
@@ -161,19 +209,103 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <div id="modal-content" class="text-sm text-slate-300 leading-relaxed">
-                <!-- Content inserted dynamically -->
-            </div>
+            <div id="modal-content" class="text-sm text-slate-300 leading-relaxed"></div>
             <div class="flex justify-end pt-2">
                 <button onclick="closeModal()" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold rounded-xl transition-colors shadow-lg shadow-rose-900/30">
-                    Got it
+                    OK
                 </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Master Database combining Grunts, Taunts, Catchable First Pokémon, and Purification Costs
+        // ==========================================
+        // 1. STATE & TRANSLATIONS (PT / EN)
+        // ==========================================
+        let currentLang = localStorage.getItem('rsi_lang') || 'pt';
+        let currentTab = 'lookup';
+        let selectedAttackerType = 'all';
+
+        const i18n = {
+            pt: {
+                headerSubtitle: "Guia de Purificação, Grunts & Melhores Atacantes",
+                tabLookup: "Busca Rápida",
+                tabDatabase: "Tabela Grunts",
+                tabAttackers: "Melhores Atacantes",
+                lookupTitle: "Consulte Custos Sombrosos na Hora",
+                lookupSubtitle: "Busque pela frase do Grunt ou direto pelo Pokémon do 1º slot para calcular a Poeira Estelar necessária.",
+                searchPlaceholder: "Digite a frase (ex: 'Let's rock') ou Pokémon ('Snorlax', 'Aron')...",
+                quickTry: "Teste rápido:",
+                emptySearch: "Comece digitando uma frase de Grunt ou nome de Pokémon acima para consultar a rotação e os custos.",
+                noMatchTitle: "Nenhum Grunt ou Pokémon Encontrado",
+                noMatchDesc: "Verifique a ortografia ou tente buscar por outra frase ou nome de Pokémon.",
+                no1kNote: "Atenção: Sem Pokémon de 1.000 Dust nesta rotação! O mínimo é 3k/5k.",
+                has1kNote: "Opção de 1.000 Dust disponível nesta rotação",
+                firstSlot: "1º Slot Capturável",
+                gruntSuffix: "Grunt",
+                dbTitle: "Matriz Completa de Rotação & Purificação",
+                dbSubtitle: "Todos os Grunts mapeados, frases, Pokémon do 1º slot e custos de purificação.",
+                thGrunt: "Tipo de Grunt",
+                thTaunt: "Frase (Taunt)",
+                thPokemon: "1º Pokémon Capturável",
+                thCost: "Custo de Purificação",
+                attackersTitle: "Melhores Atacantes por Tipo (Meta 2027)",
+                attackersSubtitle: "Ordenados do melhor para o pior por tipagem, com golpes Ágil e Carregado. Referência: SavyGO.",
+                attackersSearchPlaceholder: "Filtrar Pokémon ou golpe...",
+                legendLegacy: "Golpe Legado / MT de Elite",
+                legendPlus: "Golpe Plus",
+                legendShadow: "Sombroso",
+                allTypes: "Todos os Tipos",
+                fastMove: "Ágil",
+                chargedMove: "Carregado",
+                imgSlotLabel: "IMG",
+                noAttackersMatch: "Nenhum atacante encontrado para este filtro.",
+                footerTagline: "Esta ferramenta te ajudou a economizar Poeira Estelar?",
+                footerSub: "Rocket Shadow Index — Guia da comunidade Pokémon GO",
+                donateBtn: "Pague um café (PayPal)"
+            },
+            en: {
+                headerSubtitle: "Purification Costs, Grunt Rotations & Top Attackers",
+                tabLookup: "Smart Lookup",
+                tabDatabase: "Full Rotation DB",
+                tabAttackers: "Top Attackers",
+                lookupTitle: "Find Shadow Costs Instantly",
+                lookupSubtitle: "Search by Grunt taunt phrase or directly by the catchable 1st slot Pokémon to calculate required purification dust.",
+                searchPlaceholder: "Type taunt phrase (e.g. 'Let's rock') or Pokémon name ('Snorlax', 'Aron')...",
+                quickTry: "Quick Try:",
+                emptySearch: "Start typing a taunt or Pokémon name above to query rotation and purification costs.",
+                noMatchTitle: "No Matching Grunt or Pokémon Found",
+                noMatchDesc: "Check your spelling or try searching for another taunt phrase or catchable shadow name.",
+                no1kNote: "Note: No 1,000 Dust Pokémon in this rotation! Lowest is 3k/5k.",
+                has1kNote: "1,000 Dust option available in rotation",
+                firstSlot: "1st Slot Catchable",
+                gruntSuffix: "Grunt",
+                dbTitle: "Complete Rotation & Purification Matrix",
+                dbSubtitle: "All currently mapped Grunts, taunts, first slot Pokémon, and purification dust requirements.",
+                thGrunt: "Grunt Type",
+                thTaunt: "Taunt Phrase",
+                thPokemon: "Catchable 1st Pokémon",
+                thCost: "Purification Cost",
+                attackersTitle: "Top Attackers by Type (2027 Meta)",
+                attackersSubtitle: "Ranked from best to worst per type, including optimal Fast and Charged moves. Reference: SavyGO.",
+                attackersSearchPlaceholder: "Filter Pokémon or move...",
+                legendLegacy: "Legacy / Elite TM Move",
+                legendPlus: "Plus Move",
+                legendShadow: "Shadow",
+                allTypes: "All Types",
+                fastMove: "Fast",
+                chargedMove: "Charged",
+                imgSlotLabel: "IMG",
+                noAttackersMatch: "No attackers matched your current filter.",
+                footerTagline: "Find this tool helpful for saving Stardust?",
+                footerSub: "Rocket Shadow Index — Pokémon GO Community Reference",
+                donateBtn: "Buy me a coffee"
+            }
+        };
+
+        // ==========================================
+        // 2. TEAM GO ROCKET DATABASE (PRESERVED)
+        // ==========================================
         const rocketDatabase = [
             {
                 type: "Bug",
@@ -181,7 +313,7 @@
                 pokemon: [
                     { name: "Weedle", cost: 1000 },
                     { name: "Wimpod", cost: 3000 },
-                    { name: "Venonat", cost: 3000 }, // Corrigido para 3000
+                    { name: "Venonat", cost: 3000 },
                     { name: "Pinsir", cost: 3000 },
                     { name: "Dewpider", cost: 3000 },
                     { name: "Anorith", cost: 3000 }
@@ -195,8 +327,8 @@
                     { name: "Poochyena", cost: 1000 },
                     { name: "Purrloin", cost: 1000 },
                     { name: "Stunky", cost: 3000 },
-                    { name: "Houndour", cost: 3000 },
-                    { name: "Carvanha", cost: 3000 }
+                    { name: "Carvanha", cost: 3000 },
+                    { name: "Houndour", cost: 3000 }
                 ]
             },
             {
@@ -205,11 +337,11 @@
                 pokemon: [
                     { name: "Dratini", cost: 5000 },
                     { name: "Bagon", cost: 5000 },
-                    { name: "Gible", cost: 3000 },
-                    { name: "Alolan Exeggutor", cost: 3000 },
                     { name: "Deino", cost: 5000 },
                     { name: "Axew", cost: 5000 },
-                    { name: "Noibat", cost: 5000 }
+                    { name: "Noibat", cost: 5000 },
+                    { name: "Gible", cost: 3000 },
+                    { name: "Alolan Exeggutor", cost: 3000 }
                 ]
             },
             {
@@ -307,22 +439,10 @@
                     { name: "Swinub", cost: 3000 },
                     { name: "Snorunt", cost: 3000 },
                     { name: "Spheal", cost: 3000 },
-                    { name: "Snover", cost: 3000 },
-                    { name: "Alolan Sandshrew", cost: 3000 },
                     { name: "Seel", cost: 3000 },
-                    { name: "Delibird", cost: 5000 }
-                ]
-            },
-            {
-                type: "Normal",
-                taunt: "Normal doesn’t mean weak.",
-                pokemon: [
-                    { name: "Teddiursa", cost: 3000 },
-                    { name: "Hoothoot", cost: 1000 },
-                    { name: "Porygon", cost: 3000 },
-                    { name: "Rattata", cost: 1000 },
-                    { name: "Meowth", cost: 1000 },
-                    { name: "Whismur", cost: 1000 }
+                    { name: "Delibird", cost: 5000 },
+                    { name: "Snover", cost: 3000 },
+                    { name: "Alolan Sandshrew", cost: 3000 }
                 ]
             },
             {
@@ -342,12 +462,11 @@
                 taunt: "Coiled and ready to strike!",
                 pokemon: [
                     { name: "Zubat", cost: 1000 },
-                    { name: "Oddish", cost: 1000 },
+                    { name: "Oddish", cost: 3000 },
                     { name: "Foongus", cost: 1000 },
-                    { name: "Venonat", cost: 3000 },
+                    { name: "Qwilfish", cost: 3000 },
                     { name: "Nidoran", cost: 3000 },
-                    { name: "Grimer", cost: 3000 },
-                    { name: "Qwilfish", cost: 3000 }
+                    { name: "Grimer", cost: 3000 }
                 ]
             },
             {
@@ -414,28 +533,736 @@
             }
         ];
 
-        // Tab Switching Logic
-        function switchTab(tab) {
-            const lookupTab = document.getElementById('tab-lookup');
-            const dbTab = document.getElementById('tab-database');
-            const btnLookup = document.getElementById('btn-lookup');
-            const btnDb = document.getElementById('btn-database');
+        // ==========================================
+        // 3. TOP ATTACKERS DATABASE (17 TYPES - PT/EN + IMG SLOTS)
+        // Para adicionar imagens depois, preencha imgUrl: "https://..." ou "img/nome.png"
+        // ==========================================
+        const topAttackersDatabase = [
+            {
+                id: "fighting",
+                type: { pt: "Lutador", en: "Fighting" },
+                icon: "fa-hand-fist",
+                badgeClass: "bg-orange-600/20 text-orange-400 border-orange-500/30",
+                accentBorder: "border-orange-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Mewtwo X", en: "Mega Mewtwo X" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Contra-atacar", en: "Counter" },
+                        charged: { pt: "Soco Dinâmico+", en: "Dynamic Punch+" }
+                    },
+                    {
+                        name: { pt: "Mega Lucario", en: "Mega Lucario" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Palma da Força*", en: "Force Palm*" },
+                        charged: { pt: "Aura Esférica", en: "Aura Sphere" }
+                    },
+                    {
+                        name: { pt: "Mega Blaziken", en: "Mega Blaziken" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Contra-atacar", en: "Counter" },
+                        charged: { pt: "Aura Esférica", en: "Aura Sphere" }
+                    },
+                    {
+                        name: { pt: "Keldeo (Forma Resoluta)", en: "Keldeo (Resolute Form)" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Rasteira", en: "Low Kick" },
+                        charged: { pt: "Espada Secreta", en: "Secret Sword" }
+                    }
+                ]
+            },
+            {
+                id: "flying",
+                type: { pt: "Voador", en: "Flying" },
+                icon: "fa-feather-pointed",
+                badgeClass: "bg-sky-500/20 text-sky-300 border-sky-400/30",
+                accentBorder: "border-sky-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Rayquaza", en: "Mega Rayquaza" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Golpe de Ar", en: "Air Slash" },
+                        charged: { pt: "Ascensão do Dragão", en: "Dragon Ascent" }
+                    },
+                    {
+                        name: { pt: "Mega Staraptor", en: "Mega Staraptor" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Lufada de Vento*", en: "Gust*" },
+                        charged: { pt: "Pássaro Bravo+", en: "Brave Bird+" }
+                    },
+                    {
+                        name: { pt: "Moltres (Sombroso)", en: "Shadow Moltres" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Ataque de Asa", en: "Wing Attack" },
+                        charged: { pt: "Voar", en: "Fly" }
+                    }
+                ]
+            },
+            {
+                id: "poison",
+                type: { pt: "Veneno", en: "Poison" },
+                icon: "fa-skull-crossbones",
+                badgeClass: "bg-purple-600/20 text-purple-300 border-purple-500/30",
+                accentBorder: "border-purple-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Victreebel", en: "Mega Victreebel" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Ácido", en: "Acid" },
+                        charged: { pt: "Spray Ácido+", en: "Acid Spray+" }
+                    },
+                    {
+                        name: { pt: "Mega Gengar", en: "Mega Gengar" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Lambida*", en: "Lick*" },
+                        charged: { pt: "Bomba de Lodo", en: "Sludge Bomb" }
+                    },
+                    {
+                        name: { pt: "Eternatus", en: "Eternatus" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Golpe Envenenado", en: "Poison Jab" },
+                        charged: { pt: "Bomba de Lodo", en: "Sludge Bomb" }
+                    },
+                    {
+                        name: { pt: "Mega Beedrill", en: "Mega Beedrill" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Golpe Envenenado", en: "Poison Jab" },
+                        charged: { pt: "Bomba de Lodo", en: "Sludge Bomb" }
+                    },
+                    {
+                        name: { pt: "Nihilego", en: "Nihilego" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Golpe Envenenado", en: "Poison Jab" },
+                        charged: { pt: "Bomba de Lodo", en: "Sludge Bomb" }
+                    }
+                ]
+            },
+            {
+                id: "ground",
+                type: { pt: "Terrestre", en: "Ground" },
+                icon: "fa-mountain",
+                badgeClass: "bg-amber-700/20 text-amber-400 border-amber-600/30",
+                accentBorder: "border-amber-600/30",
+                pokemon: [
+                    {
+                        name: { pt: "Groudon Primitivo", en: "Primal Groudon" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Tiro de Lama", en: "Mud Shot" },
+                        charged: { pt: "Lâmina Abissal*", en: "Precipice Blades*" }
+                    },
+                    {
+                        name: { pt: "Mega Garchomp", en: "Mega Garchomp" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Tiro de Lama", en: "Mud Shot" },
+                        charged: { pt: "Poder da Terra*", en: "Earth Power*" }
+                    },
+                    {
+                        name: { pt: "Groudon (Sombroso)", en: "Shadow Groudon" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Tiro de Lama", en: "Mud Shot" },
+                        charged: { pt: "Lâmina Abissal*", en: "Precipice Blades*" }
+                    },
+                    {
+                        name: { pt: "Garchomp (Sombroso)", en: "Shadow Garchomp" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Tiro de Lama", en: "Mud Shot" },
+                        charged: { pt: "Poder da Terra*", en: "Earth Power*" }
+                    },
+                    {
+                        name: { pt: "Landorus (Forma Therian)", en: "Landorus (Therian Forme)" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Tiro de Lama", en: "Mud Shot" },
+                        charged: { pt: "Tempestade Saibrosa*", en: "Sandsear Storm*" }
+                    }
+                ]
+            },
+            {
+                id: "rock",
+                type: { pt: "Pedra", en: "Rock" },
+                icon: "fa-gem",
+                badgeClass: "bg-stone-500/20 text-stone-300 border-stone-400/30",
+                accentBorder: "border-stone-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Diancie", en: "Mega Diancie" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Lançamento de Rocha", en: "Rock Throw" },
+                        charged: { pt: "Deslize de Pedras", en: "Rock Slide" }
+                    },
+                    {
+                        name: { pt: "Rhyperior (Sombroso)", en: "Shadow Rhyperior" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Derrubada", en: "Smack Down" },
+                        charged: { pt: "Demolidor de Pedras*", en: "Rock Wrecker*" }
+                    },
+                    {
+                        name: { pt: "Mega Tyranitar", en: "Mega Tyranitar" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Derrubada*", en: "Smack Down*" },
+                        charged: { pt: "Gume de Pedra", en: "Stone Edge" }
+                    },
+                    {
+                        name: { pt: "Mega Aerodactyl", en: "Mega Aerodactyl" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Lançamento de Rocha", en: "Rock Throw" },
+                        charged: { pt: "Deslize de Pedras", en: "Rock Slide" }
+                    },
+                    {
+                        name: { pt: "Rampardos (Sombroso)", en: "Shadow Rampardos" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Derrubada", en: "Smack Down" },
+                        charged: { pt: "Deslize de Pedras", en: "Rock Slide" }
+                    },
+                    {
+                        name: { pt: "Tyrantrum (Sombroso)", en: "Shadow Tyrantrum" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Lançamento de Rocha", en: "Rock Throw" },
+                        charged: { pt: "Raio Meteórico", en: "Meteor Beam" }
+                    }
+                ]
+            },
+            {
+                id: "bug",
+                type: { pt: "Inseto", en: "Bug" },
+                icon: "fa-bug",
+                badgeClass: "bg-lime-600/20 text-lime-400 border-lime-500/30",
+                accentBorder: "border-lime-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Beedrill", en: "Mega Beedrill" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Picada*", en: "Bug Bite*" },
+                        charged: { pt: "Ferrão Letal+", en: "Fell Stinger+" }
+                    },
+                    {
+                        name: { pt: "Mega Heracross", en: "Mega Heracross" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cortador de Fúria", en: "Fury Cutter" },
+                        charged: { pt: "Megachifre", en: "Megahorn" }
+                    }
+                ]
+            },
+            {
+                id: "ghost",
+                type: { pt: "Fantasma", en: "Ghost" },
+                icon: "fa-ghost",
+                badgeClass: "bg-indigo-600/20 text-indigo-300 border-indigo-500/30",
+                accentBorder: "border-indigo-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Chandelure", en: "Mega Chandelure" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Feitiço", en: "Hex" },
+                        charged: { pt: "Vento Ominoso+", en: "Ominous Wind+" }
+                    },
+                    {
+                        name: { pt: "Necrozma (Asas Alvorada)", en: "Dawn Wings Necrozma" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Garra Sombria", en: "Shadow Claw" },
+                        charged: { pt: "Feixe Espectral", en: "Moongeist Beam" }
+                    },
+                    {
+                        name: { pt: "Mega Mewtwo Y", en: "Mega Mewtwo Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Corte Psíquico", en: "Psycho Cut" },
+                        charged: { pt: "Bola Sombria", en: "Shadow Ball" }
+                    },
+                    {
+                        name: { pt: "Mega Gengar", en: "Mega Gengar" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Lambida*", en: "Lick*" },
+                        charged: { pt: "Bola Sombria", en: "Shadow Ball" }
+                    }
+                ]
+            },
+            {
+                id: "steel",
+                type: { pt: "Metal", en: "Steel" },
+                icon: "fa-shield",
+                badgeClass: "bg-slate-400/20 text-slate-200 border-slate-400/30",
+                accentBorder: "border-slate-500/40",
+                pokemon: [
+                    {
+                        name: { pt: "Zacian (Espada Coroada)", en: "Zacian (Crowned Sword)" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Garra de Metal", en: "Metal Claw" },
+                        charged: { pt: "Espada Colossal", en: "Behemoth Blade" }
+                    },
+                    {
+                        name: { pt: "Zamazenta (Escudo Coroado)", en: "Zamazenta (Crowned Shield)" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Garra de Metal", en: "Metal Claw" },
+                        charged: { pt: "Pancada Colossal", en: "Behemoth Bash" }
+                    },
+                    {
+                        name: { pt: "Necrozma (Juba Crepúsculo)", en: "Dusk Mane Necrozma" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Garra de Metal", en: "Metal Claw" },
+                        charged: { pt: "Ataque Solaraço", en: "Sunsteel Strike" }
+                    },
+                    {
+                        name: { pt: "Mega Metagross", en: "Mega Metagross" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Soco Projétil", en: "Bullet Punch" },
+                        charged: { pt: "Meteoro Esmagador*", en: "Meteor Mash*" }
+                    }
+                ]
+            },
+            {
+                id: "fire",
+                type: { pt: "Fogo", en: "Fire" },
+                icon: "fa-fire",
+                badgeClass: "bg-red-600/20 text-red-400 border-red-500/30",
+                accentBorder: "border-red-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Delphox", en: "Mega Delphox" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Chama Furacão", en: "Fire Spin" },
+                        charged: { pt: "Fogo Místico+", en: "Mystical Fire+" }
+                    },
+                    {
+                        name: { pt: "Mega Charizard Y", en: "Mega Charizard Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Chama Furacão", en: "Fire Spin" },
+                        charged: { pt: "Queimadura Explosiva*", en: "Blast Burn*" }
+                    },
+                    {
+                        name: { pt: "Mega Blaziken", en: "Mega Blaziken" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Chama Furacão", en: "Fire Spin" },
+                        charged: { pt: "Queimadura Explosiva*", en: "Blast Burn*" }
+                    },
+                    {
+                        name: { pt: "Reshiram (Sombroso)", en: "Shadow Reshiram" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Presas de Fogo", en: "Fire Fang" },
+                        charged: { pt: "Chama da Fusão*", en: "Fusion Flare*" }
+                    },
+                    {
+                        name: { pt: "Blacephalon", en: "Blacephalon" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Incinerar", en: "Incinerate" },
+                        charged: { pt: "Explosão Mental", en: "Mind Blown" }
+                    }
+                ]
+            },
+            {
+                id: "water",
+                type: { pt: "Água", en: "Water" },
+                icon: "fa-droplet",
+                badgeClass: "bg-blue-600/20 text-blue-400 border-blue-500/30",
+                accentBorder: "border-blue-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Kyogre Primitivo", en: "Primal Kyogre" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cachoeira", en: "Waterfall" },
+                        charged: { pt: "Pulso Original*", en: "Origin Pulse*" }
+                    },
+                    {
+                        name: { pt: "Mega Greninja", en: "Mega Greninja" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Estrela Ninja", en: "Water Shuriken" },
+                        charged: { pt: "Surfar+", en: "Surf+" }
+                    },
+                    {
+                        name: { pt: "Mega Starmie", en: "Mega Starmie" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Revólver D'Água", en: "Water Gun" },
+                        charged: { pt: "Aquaríete+", en: "Liquidation+" }
+                    },
+                    {
+                        name: { pt: "Mega Swampert", en: "Mega Swampert" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Revólver D'Água", en: "Water Gun" },
+                        charged: { pt: "Hidro Canhão*", en: "Hydro Cannon*" }
+                    },
+                    {
+                        name: { pt: "Kyogre (Sombroso)", en: "Shadow Kyogre" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Cachoeira", en: "Waterfall" },
+                        charged: { pt: "Pulso Original*", en: "Origin Pulse*" }
+                    }
+                ]
+            },
+            {
+                id: "grass",
+                type: { pt: "Planta", en: "Grass" },
+                icon: "fa-leaf",
+                badgeClass: "bg-emerald-600/20 text-emerald-400 border-emerald-500/30",
+                accentBorder: "border-emerald-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Chesnaught", en: "Mega Chesnaught" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Chicote de Vinha", en: "Vine Whip" },
+                        charged: { pt: "Bomba de Sementes+", en: "Seed Bomb+" }
+                    },
+                    {
+                        name: { pt: "Mega Sceptile", en: "Mega Sceptile" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cortador de Fúria", en: "Fury Cutter" },
+                        charged: { pt: "Planta Mortal*", en: "Frenzy Plant*" }
+                    },
+                    {
+                        name: { pt: "Mega Venusaur", en: "Mega Venusaur" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Chicote de Vinha", en: "Vine Whip" },
+                        charged: { pt: "Planta Mortal*", en: "Frenzy Plant*" }
+                    },
+                    {
+                        name: { pt: "Kartana", en: "Kartana" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Folha Navalha", en: "Razor Leaf" },
+                        charged: { pt: "Lâmina de Folha", en: "Leaf Blade" }
+                    }
+                ]
+            },
+            {
+                id: "electric",
+                type: { pt: "Elétrico", en: "Electric" },
+                icon: "fa-bolt",
+                badgeClass: "bg-yellow-500/20 text-yellow-300 border-yellow-400/30",
+                accentBorder: "border-yellow-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Raichu Y", en: "Mega Raichu Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Trovoada de Choque", en: "Thunder Shock" },
+                        charged: { pt: "Canhão Zap+", en: "Zap Cannon+" }
+                    },
+                    {
+                        name: { pt: "Mega Manectric", en: "Mega Manectric" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Presa Trovejante", en: "Thunder Fang" },
+                        charged: { pt: "Descarga+", en: "Discharge+" }
+                    },
+                    {
+                        name: { pt: "Mega Mewtwo Y", en: "Mega Mewtwo Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Corte Psíquico", en: "Psycho Cut" },
+                        charged: { pt: "Relâmpago", en: "Thunderbolt" }
+                    },
+                    {
+                        name: { pt: "Zekrom (Sombroso)", en: "Shadow Zekrom" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Carga de Raio", en: "Charge Beam" },
+                        charged: { pt: "Raio de Fusão", en: "Fusion Bolt" }
+                    },
+                    {
+                        name: { pt: "Zeraora", en: "Zeraora" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Troca Elétrica", en: "Volt Switch" },
+                        charged: { pt: "Punhos de Plasma", en: "Plasma Fists" }
+                    },
+                    {
+                        name: { pt: "Raikou (Sombroso)", en: "Shadow Raikou" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Trovoada de Choque", en: "Thunder Shock" },
+                        charged: { pt: "Ataque Selvagem", en: "Wild Charge" }
+                    }
+                ]
+            },
+            {
+                id: "psychic",
+                type: { pt: "Psíquico", en: "Psychic" },
+                icon: "fa-eye",
+                badgeClass: "bg-pink-600/20 text-pink-400 border-pink-500/30",
+                accentBorder: "border-pink-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Mewtwo Y", en: "Mega Mewtwo Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Corte Psíquico", en: "Psycho Cut" },
+                        charged: { pt: "Visão do Futuro+", en: "Future Sight+" }
+                    },
+                    {
+                        name: { pt: "Mega Mewtwo X", en: "Mega Mewtwo X" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Confusão", en: "Confusion" },
+                        charged: { pt: "Golpe Psíquico*", en: "Psystrike*" }
+                    },
+                    {
+                        name: { pt: "Mewtwo (Sombroso)", en: "Shadow Mewtwo" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Confusão", en: "Confusion" },
+                        charged: { pt: "Golpe Psíquico*", en: "Psystrike*" }
+                    }
+                ]
+            },
+            {
+                id: "ice",
+                type: { pt: "Gelo", en: "Ice" },
+                icon: "fa-snowflake",
+                badgeClass: "bg-cyan-500/20 text-cyan-300 border-cyan-400/30",
+                accentBorder: "border-cyan-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Kyurem Branco", en: "White Kyurem" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Presa de Gelo", en: "Ice Fang" },
+                        charged: { pt: "Queimadura de Gelo", en: "Ice Burn" }
+                    },
+                    {
+                        name: { pt: "Kyurem Preto", en: "Black Kyurem" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Choque Congelante", en: "Freeze Shock" }
+                    },
+                    {
+                        name: { pt: "Mega Mewtwo Y", en: "Mega Mewtwo Y" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Corte Psíquico", en: "Psycho Cut" },
+                        charged: { pt: "Raio Congelante", en: "Ice Beam" }
+                    },
+                    {
+                        name: { pt: "Mamoswine (Sombroso)", en: "Shadow Mamoswine" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Neve em Pó", en: "Powder Snow" },
+                        charged: { pt: "Avalanche", en: "Avalanche" }
+                    }
+                ]
+            },
+            {
+                id: "dragon",
+                type: { pt: "Dragão", en: "Dragon" },
+                icon: "fa-dragon",
+                badgeClass: "bg-violet-600/20 text-violet-300 border-violet-500/30",
+                accentBorder: "border-violet-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Rayquaza", en: "Mega Rayquaza" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Golpe Deslizante*", en: "Breaking Swipe*" }
+                    },
+                    {
+                        name: { pt: "Eternatus", en: "Eternatus" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Canhão Dinamax*", en: "Dynamax Cannon*" }
+                    },
+                    {
+                        name: { pt: "Mega Dragonite", en: "Mega Dragonite" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Ultraje+", en: "Outrage+" }
+                    },
+                    {
+                        name: { pt: "Mega Garchomp", en: "Mega Garchomp" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Golpe Deslizante", en: "Breaking Swipe" }
+                    },
+                    {
+                        name: { pt: "Garchomp (Sombroso)", en: "Shadow Garchomp" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Cauda do Dragão", en: "Dragon Tail" },
+                        charged: { pt: "Golpe Deslizante", en: "Breaking Swipe" }
+                    }
+                ]
+            },
+            {
+                id: "dark",
+                type: { pt: "Sombrio", en: "Dark" },
+                icon: "fa-moon",
+                badgeClass: "bg-zinc-600/30 text-zinc-200 border-zinc-500/40",
+                accentBorder: "border-zinc-500/40",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Houndoom", en: "Mega Houndoom" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Rosnado", en: "Snarl" },
+                        charged: { pt: "Pulso Sombrio+", en: "Dark Pulse+" }
+                    },
+                    {
+                        name: { pt: "Mega Tyranitar", en: "Mega Tyranitar" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Mordida", en: "Bite" },
+                        charged: { pt: "Balanço Violento", en: "Brutal Swing" }
+                    },
+                    {
+                        name: { pt: "Darkrai (Sombroso)", en: "Shadow Darkrai" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Rosnado", en: "Snarl" },
+                        charged: { pt: "Pulso Sombrio", en: "Dark Pulse" }
+                    },
+                    {
+                        name: { pt: "Hydreigon (Sombroso)", en: "Shadow Hydreigon" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Mordida", en: "Bite" },
+                        charged: { pt: "Balanço Violento*", en: "Brutal Swing*" }
+                    },
+                    {
+                        name: { pt: "Tyranitar (Sombroso)", en: "Shadow Tyranitar" },
+                        imgUrl: "",
+                        isShadow: true,
+                        fast: { pt: "Mordida", en: "Bite" },
+                        charged: { pt: "Balanço Violento", en: "Brutal Swing" }
+                    }
+                ]
+            },
+            {
+                id: "fairy",
+                type: { pt: "Fada", en: "Fairy" },
+                icon: "fa-wand-magic-sparkles",
+                badgeClass: "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-400/30",
+                accentBorder: "border-fuchsia-500/30",
+                pokemon: [
+                    {
+                        name: { pt: "Mega Gardevoir", en: "Mega Gardevoir" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Encantar", en: "Charm" },
+                        charged: { pt: "Clarão Deslumbrante", en: "Dazzling Gleam" }
+                    },
+                    {
+                        name: { pt: "Zacian (Espada Coroada)", en: "Zacian (Crowned Sword)" },
+                        imgUrl: "",
+                        isShadow: false,
+                        fast: { pt: "Golpe de Ar", en: "Air Slash" },
+                        charged: { pt: "Jogo Duro", en: "Play Rough" }
+                    }
+                ]
+            }
+        ];
 
-            if (tab === 'lookup') {
-                lookupTab.classList.remove('hidden');
-                dbTab.classList.add('hidden');
-                btnLookup.className = "px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-900/30";
-                btnDb.className = "px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800";
-            } else {
-                lookupTab.classList.add('hidden');
-                dbTab.classList.remove('hidden');
-                btnDb.className = "px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-900/30";
-                btnLookup.className = "px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800";
-                renderDatabaseTable();
+        // ==========================================
+        // 4. LANGUAGE & TAB LOGIC
+        // ==========================================
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('rsi_lang', lang);
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            const t = i18n[currentLang];
+
+            document.getElementById('lang-pt').className = lang === 'pt'
+                ? "px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all bg-rose-600 text-white shadow"
+                : "px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+            document.getElementById('lang-en').className = lang === 'en'
+                ? "px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all bg-rose-600 text-white shadow"
+                : "px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+
+            document.getElementById('header-subtitle').textContent = t.headerSubtitle;
+            document.getElementById('global-search').placeholder = t.searchPlaceholder;
+            document.getElementById('attackers-search').placeholder = t.attackersSearchPlaceholder;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (key === 'attackersTitle') {
+                        el.innerHTML = `<i class="fa-solid fa-trophy text-amber-400"></i> ${t[key]}`;
+                    } else {
+                        el.textContent = t[key];
+                    }
+                }
+            });
+
+            handleSearch(document.getElementById('global-search').value);
+            renderDatabaseTable();
+            renderTypeFilters();
+            renderAttackers();
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            const tabs = ['lookup', 'database', 'attackers'];
+            const activeBtn = "px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-900/30";
+            const inactiveBtn = "px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800";
+
+            tabs.forEach(name => {
+                const section = document.getElementById(`tab-${name}`);
+                const btn = document.getElementById(`btn-${name}`);
+                if (name === tab) {
+                    section.classList.remove('hidden');
+                    btn.className = activeBtn;
+                } else {
+                    section.classList.add('hidden');
+                    btn.className = inactiveBtn;
+                }
+            });
+
+            if (tab === 'database') renderDatabaseTable();
+            if (tab === 'attackers') {
+                renderTypeFilters();
+                renderAttackers();
             }
         }
 
-        // Render Database Table
+        // ==========================================
+        // 5. ROCKET GRUNT LOOKUP & DB FUNCTIONS
+        // ==========================================
         function renderDatabaseTable() {
             const tbody = document.getElementById('full-db-tbody');
             tbody.innerHTML = '';
@@ -468,11 +1295,11 @@
             }
         }
 
-        // Handle Search Query
         function handleSearch(query) {
+            const t = i18n[currentLang];
             const clearBtn = document.getElementById('clear-btn');
             const resultsContainer = document.getElementById('search-results');
-            
+
             if (query.trim().length > 0) {
                 clearBtn.classList.remove('hidden');
             } else {
@@ -480,7 +1307,7 @@
                 resultsContainer.innerHTML = `
                     <div class="text-center py-12 text-slate-500 border border-dashed border-slate-800 rounded-2xl">
                         <i class="fa-solid fa-rocket text-3xl mb-3 text-slate-700 animate-pulse"></i>
-                        <p class="text-sm font-medium">Start typing a taunt or Pokémon name above to query rotation and purification costs.</p>
+                        <p class="text-sm font-medium">${t.emptySearch}</p>
                     </div>
                 `;
                 return;
@@ -497,39 +1324,35 @@
                 resultsContainer.innerHTML = `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-3">
                         <i class="fa-solid fa-triangle-exclamation text-amber-500 text-2xl"></i>
-                        <h3 class="text-base font-bold text-white">No Matching Grunt or Pokémon Found</h3>
-                        <p class="text-xs text-slate-400">Check your spelling or try searching for another taunt phrase or catchable shadow name.</p>
+                        <h3 class="text-base font-bold text-white">${t.noMatchTitle}</h3>
+                        <p class="text-xs text-slate-400">${t.noMatchDesc}</p>
                     </div>
                 `;
                 return;
             }
 
-            // Build HTML cards for matches
             let html = '';
             matches.forEach(item => {
-                // Check if this grunt type/rotation has 1k dust Pokémon
                 const has1k = item.pokemon.some(p => p.cost === 1000);
-                
                 html += `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-4">
                             <div>
-                                <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-rose-500/20 text-rose-400 border border-rose-500/30 uppercase tracking-wider">${item.type} Grunt</span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-rose-500/20 text-rose-400 border border-rose-500/30 uppercase tracking-wider">${item.type} ${t.gruntSuffix}</span>
                                 <h3 class="text-base font-bold text-white mt-1.5 italic">"${item.taunt}"</h3>
                             </div>
                             ${!has1k ? `
                                 <div class="bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs px-3 py-1.5 rounded-xl flex items-center gap-2">
                                     <i class="fa-solid fa-circle-exclamation"></i>
-                                    <span>Note: No 1,000 Dust Pokémon in this rotation! Lowest is 3k/5k.</span>
+                                    <span>${t.no1kNote}</span>
                                 </div>
                             ` : `
                                 <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1.5 rounded-xl flex items-center gap-2">
                                     <i class="fa-solid fa-circle-check"></i>
-                                    <span>1,000 Dust option available in rotation</span>
+                                    <span>${t.has1kNote}</span>
                                 </div>
                             `}
                         </div>
-
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 `;
 
@@ -542,20 +1365,15 @@
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-white">${p.name}</h4>
-                                    <p class="text-[10px] text-slate-400">1st Slot Catchable</p>
+                                    <p class="text-[10px] text-slate-400">${t.firstSlot}</p>
                                 </div>
                             </div>
-                            <div>
-                                ${getCostBadge(p.cost)}
-                            </div>
+                            <div>${getCostBadge(p.cost)}</div>
                         </div>
                     `;
                 });
 
-                html += `
-                        </div>
-                    </div>
-                `;
+                html += `</div></div>`;
             });
 
             resultsContainer.innerHTML = html;
@@ -572,6 +1390,160 @@
             handleSearch(term);
         }
 
+        // ==========================================
+        // 6. TOP ATTACKERS RENDERING & FILTERING
+        // ==========================================
+        function selectAttackerType(typeId) {
+            selectedAttackerType = typeId;
+            renderTypeFilters();
+            renderAttackers();
+        }
+
+        function renderTypeFilters() {
+            const t = i18n[currentLang];
+            const container = document.getElementById('type-filters');
+            let html = `
+                <button onclick="selectAttackerType('all')"
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${selectedAttackerType === 'all' ? 'bg-rose-600 text-white border-rose-500 shadow' : 'bg-slate-950/70 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'}">
+                    ${t.allTypes}
+                </button>
+            `;
+
+            topAttackersDatabase.forEach(group => {
+                const isActive = selectedAttackerType === group.id;
+                html += `
+                    <button onclick="selectAttackerType('${group.id}')"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${isActive ? 'bg-rose-600 text-white border-rose-500 shadow' : 'bg-slate-950/70 text-slate-300 border-slate-800 hover:border-slate-700 hover:bg-slate-800'}">
+                        <i class="fa-solid ${group.icon} text-[11px]"></i>
+                        ${group.type[currentLang]}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function getRankBadge(index) {
+            const rank = index + 1;
+            if (rank === 1) return `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">#1</span>`;
+            if (rank === 2) return `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-300/20 text-slate-200 border border-slate-300/30">#2</span>`;
+            if (rank === 3) return `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">#3</span>`;
+            return `<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-slate-800 text-slate-400 border border-slate-700">#${rank}</span>`;
+        }
+
+        function formatMoveText(moveStr) {
+            let formatted = moveStr;
+            if (formatted.endsWith('*')) {
+                formatted = formatted.slice(0, -1) + `<span class="ml-1 text-sky-400 font-bold" title="Legacy / Elite TM">*</span>`;
+            } else if (formatted.endsWith('+')) {
+                formatted = formatted.slice(0, -1) + `<span class="ml-0.5 text-amber-300 font-bold" title="Plus Move">+</span>`;
+            }
+            return formatted;
+        }
+
+        function renderAttackers() {
+            const t = i18n[currentLang];
+            const query = (document.getElementById('attackers-search').value || '').toLowerCase().trim();
+            const container = document.getElementById('attackers-container');
+
+            let html = '';
+
+            topAttackersDatabase.forEach(group => {
+                if (selectedAttackerType !== 'all' && group.id !== selectedAttackerType) return;
+
+                const filteredPokemon = group.pokemon
+                    .map((p, idx) => ({ ...p, originalRank: idx }))
+                    .filter(p => {
+                        if (!query) return true;
+                        const haystack = [
+                            group.type.pt, group.type.en,
+                            p.name.pt, p.name.en,
+                            p.fast.pt, p.fast.en,
+                            p.charged.pt, p.charged.en
+                        ].join(' ').toLowerCase();
+                        return haystack.includes(query);
+                    });
+
+                if (filteredPokemon.length === 0) return;
+
+                html += `
+                    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-2.5">
+                                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold border uppercase tracking-wider ${group.badgeClass}">
+                                    <i class="fa-solid ${group.icon}"></i>
+                                    ${group.type[currentLang]}
+                                </span>
+                                <span class="text-xs text-slate-500">${filteredPokemon.length} Pokémon</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                `;
+
+                filteredPokemon.forEach(p => {
+                    const isPlus = p.charged[currentLang].includes('+');
+                    const shadowFlame = p.isShadow
+                        ? `<span class="absolute -bottom-1 -left-1 w-5 h-5 rounded-full bg-slate-950 border border-purple-500/50 flex items-center justify-center text-purple-400 text-[10px] shadow" title="${t.legendShadow}"><i class="fa-solid fa-fire-flame-curved"></i></span>`
+                        : '';
+
+                    const imageSlot = p.imgUrl
+                        ? `<img src="${p.imgUrl}" alt="${p.name[currentLang]}" class="w-full h-full object-contain p-1">`
+                        : `<div class="flex flex-col items-center justify-center text-slate-600 select-none">
+                               <i class="fa-solid ${group.icon} text-base opacity-60"></i>
+                               <span class="text-[9px] font-bold tracking-wider mt-0.5 opacity-50">${t.imgSlotLabel}</span>
+                           </div>`;
+
+                    html += `
+                        <div class="bg-slate-950/70 border border-slate-800/90 hover:border-slate-700 rounded-xl p-4 flex items-start gap-3.5 transition-colors">
+                            <!-- Espaço reservado para imagem do Pokémon (56x56px) -->
+                            <div class="relative w-14 h-14 shrink-0">
+                                <div class="w-14 h-14 rounded-xl bg-slate-900 border border-dashed ${group.accentBorder} flex items-center justify-center overflow-hidden shadow-inner">
+                                    ${imageSlot}
+                                </div>
+                                ${shadowFlame}
+                            </div>
+
+                            <div class="min-w-0 flex-1 space-y-2">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="text-sm font-bold text-white truncate" title="${p.name[currentLang]}">${p.name[currentLang]}</h3>
+                                    ${getRankBadge(p.originalRank)}
+                                </div>
+
+                                <div class="space-y-1.5 text-xs">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-semibold uppercase shrink-0">${t.fastMove}</span>
+                                        <span class="text-slate-200 truncate" title="${p.fast[currentLang]}">${formatMoveText(p.fast[currentLang])}</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="px-1.5 py-0.5 rounded ${isPlus ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-rose-500/15 text-rose-300'} text-[10px] font-semibold uppercase shrink-0">${t.chargedMove}</span>
+                                        <span class="${isPlus ? 'text-amber-200 font-medium' : 'text-slate-200'} truncate" title="${p.charged[currentLang]}">${formatMoveText(p.charged[currentLang])}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></section>`;
+            });
+
+            if (!html) {
+                container.innerHTML = `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-10 text-center text-slate-400 text-sm">
+                        <i class="fa-solid fa-magnifying-glass text-2xl text-slate-600 mb-2 block"></i>
+                        ${t.noAttackersMatch}
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // 7. MODAL & INITIALIZATION
+        // ==========================================
         function closeModal() {
             document.getElementById('custom-modal').classList.add('hidden');
         }
@@ -582,9 +1554,8 @@
             document.getElementById('custom-modal').classList.remove('hidden');
         }
 
-        // Initialize table on load
         window.onload = function() {
-            renderDatabaseTable();
+            setLanguage(currentLang);
         };
     </script>
 </body>
